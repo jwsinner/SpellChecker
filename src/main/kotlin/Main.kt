@@ -1,10 +1,17 @@
+import io.Dictionary
+import io.SourceText
+import service.SpellChecker
+import util.DictionaryTrie
 import java.io.File
 
 fun main(args: Array<String>) {
-    File(args.first()).readLines().stream().limit(5).forEach(System.out::println)
-    println("Hello World!")
+    val dictionaryLocation = args[0].toString()
+    val sourceLocation = args[1].toString()
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+    val dictionary = Dictionary(dictionaryLocation)
+    val source = SourceText(sourceLocation)
+    val spellChecker = SpellChecker(dictionary, source)
+
+    spellChecker.displayErrorsWithSuggestions()
+
 }

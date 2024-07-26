@@ -45,4 +45,14 @@ class SpellChecker(private val dictionary: Dictionary, private val sourceText: S
         }
         return distance[first.length][second.length]
     }
+
+    fun displayErrorsWithSuggestions(){
+        val errors = getMisspelledWords()
+        errors.stream()
+            .forEach { word ->
+                println(word)
+                getSuggestions(word).forEach { println("\t| $it") }
+            }
+
+    }
 }

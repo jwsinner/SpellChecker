@@ -12,7 +12,7 @@ class SourceText(private val sourceTextLocation: String): Text<List<List<String>
             File(location)
                 .bufferedReader()
                 .readLines()
-                .map { line -> line.split(" ") }
+                .map { line -> line.replace(Regex("[^a-zA-Z ]"), "").lowercase().split(" ")}
         } catch (e: IOException){
             e.printStackTrace()
             null
