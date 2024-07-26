@@ -7,7 +7,7 @@ import kotlin.streams.toList
 
 class SpellChecker(private val dictionary: Dictionary, private val sourceText: SourceText) {
 
-    private val misspelledWords: MutableList<String> = mutableListOf()
+    private val misspelledWords: MutableList<String> = getMisspelledWords()
 
     fun getMisspelledWords(): MutableList<String>{
         val terms = dictionary.getTerms() ?: return mutableListOf()
@@ -20,4 +20,8 @@ class SpellChecker(private val dictionary: Dictionary, private val sourceText: S
             }
             .collect(Collectors.toList())
     }
+
+//    fun getSuggestions(): List<String>{
+//
+//    }
 }
