@@ -8,6 +8,10 @@ import java.util.stream.Collectors
 
 class SpellChecker(private val dictionary: Dictionary, private val sourceText: SourceText) {
 
+    /**
+     * Returns a map of words not found in the provided dictionary (misspelled)
+     * The key is a [Pair] with the first value being the row, and the second value being the column
+     */
     fun getMisspelledWords(): HashMap<Pair<Int, Int>, String> {
         val terms = dictionary.getTerms() ?: return hashMapOf()
         val text = sourceText.getWordsWithoutPunctuation() ?: return hashMapOf()
@@ -22,6 +26,10 @@ class SpellChecker(private val dictionary: Dictionary, private val sourceText: S
             ))
     }
 
+    /**
+     * Returns a map of suggested words based on the misspelled [word]
+     * sorted first by the Levenshtein distance, then by the index of the suggested word
+     */
     fun getSuggestions(word: String): SortedMap<Pair<Int, Int>, String>{
         val dictTrie = DictionaryTrie(dictionary)
         val map = hashMapOf<Pair<Int, Int>, String>()
@@ -35,6 +43,10 @@ class SpellChecker(private val dictionary: Dictionary, private val sourceText: S
         return map.toSortedMap(compareBy<Pair<Int, Int>> { it.first }.thenBy { it.second })
     }
 
+    /**
+     * Returns the Levenshtein distance between theh [first] string and [second] string provided.
+     *
+     */
     fun getEditDistance(first: String, second: String): Int{
         val distance = Array(first.length + 1){IntArray(second.length + 1)}
 
@@ -51,8 +63,16 @@ class SpellChecker(private val dictionary: Dictionary, private val sourceText: S
         return distance[first.length][second.length]
     }
 
+    /**
+     * A void print function that displays the row, column, the words before and after the typo
+     * as well as a list of suggested words indented based on Levenshtein distance
+     */
     fun displayErrorsWithSuggestions(){
         val errors = getMisspelledWords()
+        if(errors.isEmpty()){
+            println("No spelling errors found")
+            return
+        }
         val allWords = sourceText.getWords()
         errors.entries.stream()
             .forEach { word ->
