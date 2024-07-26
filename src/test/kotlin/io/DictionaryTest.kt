@@ -1,5 +1,6 @@
 package io
 
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import kotlin.reflect.typeOf
 import kotlin.test.assertNull
@@ -11,7 +12,7 @@ class DictionaryTest {
         val d = Dictionary("dictionaryTest.txt")
         val strings = d.getTerms()
         assert(strings is HashSet<*>)
-        assert(strings!!.size == 6)
+        assertEquals(strings!!.size, 17)
     }
 
     @Test

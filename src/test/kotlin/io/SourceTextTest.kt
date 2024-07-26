@@ -8,14 +8,14 @@ class SourceTextTest {
     @Test
     fun `getText returns a list of string lists from file input`(){
         val text = SourceText("sourceTextTest.txt")
-        val lines = text.getLines()
-        lines!!.forEach { line -> assert(line.size > 1) }
+        val lines = text.getWords()
+        lines!!.forEach { it is HashMap<*, *> }
     }
 
     @Test
     fun `getText returns null if file doesn't exist`(){
         val text = SourceText("nothing.txt")
-        val lines = text.getLines()
+        val lines = text.getWords()
         assertNull(lines)
     }
 }

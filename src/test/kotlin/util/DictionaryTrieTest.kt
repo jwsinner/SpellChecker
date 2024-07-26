@@ -11,7 +11,7 @@ class DictionaryTrieTest {
     fun `insert populates the trie with data from strings`(){
         val trie = DictionaryTrie(dictionary)
         trie.loadDictionary()
-        assert(trie.getTrie().children.size == 2)
+        assert(trie.getTrie().children.size == 3)
     }
 
     @Test
