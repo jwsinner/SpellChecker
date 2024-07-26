@@ -1,6 +1,8 @@
 package util
 
-class DictionaryTrie {
+import io.Dictionary
+
+class DictionaryTrie(private val dictionary: Dictionary) {
 
     private var rootNode: TrieNode = TrieNode()
 
@@ -29,6 +31,10 @@ class DictionaryTrie {
                 findAllWords(entry.value, prefix, words)
                 prefix.deleteCharAt(prefix.length - 1)
             }
+    }
+
+    fun loadDictionary(){
+        dictionary.getTerms()?.stream()?.forEach { insert(it) }
     }
 
     fun getTrie(): TrieNode{
