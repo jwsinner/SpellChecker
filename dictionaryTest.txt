@@ -10,3 +10,8 @@ bba
 bbc
 bbd
 bbe
+spell
+speller
+spelling
+spellings
+spells

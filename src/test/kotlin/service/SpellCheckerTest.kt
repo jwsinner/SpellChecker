@@ -3,6 +3,7 @@ package service
 import io.Dictionary
 import io.SourceText
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class SpellCheckerTest {
 
@@ -13,7 +14,7 @@ class SpellCheckerTest {
     fun `getMisspelledWords returns a list of words not contained in dictionary`(){
         val checker = SpellChecker(dictionary, source)
         val misspelled = checker.getMisspelledWords()
-        assert(misspelled.size == 9)
+        assertEquals(misspelled.size, 9)
     }
 
     @Test
@@ -36,6 +37,13 @@ class SpellCheckerTest {
         val second = "splelin"
         val checker = SpellChecker(dictionary, source)
         val distance = checker.getEditDistance(first, second)
-        assert(distance == 3)
+        assertEquals(distance, 3)
+    }
+
+    @Test
+    fun `getSuggestions returns list of suggested spellings for misspelled word`(){
+        val checker = SpellChecker(dictionary, source)
+        val suggestions = checker.getSuggestions("spelle")
+        assertEquals(suggestions.size, 3)
     }
 }

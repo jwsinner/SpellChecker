@@ -2,6 +2,7 @@ package service
 
 import io.Dictionary
 import io.SourceText
+import util.DictionaryTrie
 import java.util.stream.Collectors
 import kotlin.streams.toList
 
@@ -21,9 +22,13 @@ class SpellChecker(private val dictionary: Dictionary, private val sourceText: S
             .collect(Collectors.toList())
     }
 
-//    fun getSuggestions(): List<String>{
-//
-//    }
+    fun getSuggestions(word: String): List<String>{
+        val dictTrie = DictionaryTrie(dictionary)
+        dictTrie.loadDictionary()
+        return dictTrie.findWordsWithPrefix(word.substring(0,1)).parallelStream()
+            .filter { dictWord -> getEditDistance(word, dictWord) <= 2 }
+            .collect(Collectors.toList())
+    }
 
     fun getEditDistance(first: String, second: String): Int{
         val distance = Array(first.length + 1){IntArray(second.length + 1)}
