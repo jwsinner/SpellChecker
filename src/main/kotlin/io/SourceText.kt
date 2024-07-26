@@ -3,11 +3,11 @@ package io
 import java.io.File
 import java.io.IOException
 
-class SourceText(private val sourceTextLocation: String) {
+class SourceText(private val sourceTextLocation: String): Text<List<List<String>>?> {
 
     private val lines = getText(sourceTextLocation)
 
-     private fun getText(location: String): List<List<String>>? {
+     override fun getText(location: String): List<List<String>>? {
         return try {
             File(location)
                 .bufferedReader()

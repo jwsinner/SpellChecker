@@ -1,14 +1,16 @@
 package io
 
 import org.junit.jupiter.api.Test
+import kotlin.reflect.typeOf
 import kotlin.test.assertNull
 
 class DictionaryTest {
 
     @Test
-    fun `getText returns a list of single string lists from input file`(){
+    fun `getText returns a HashSet of single string from input file`(){
         val d = Dictionary("dictionaryTest.txt")
         val strings = d.getTerms()
+        assert(strings is HashSet<*>)
         assert(strings!!.size == 6)
     }
 
