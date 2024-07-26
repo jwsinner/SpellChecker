@@ -29,4 +29,13 @@ class SpellCheckerTest {
         val misspelled = checker.getMisspelledWords()
         assert(misspelled.isEmpty())
     }
+
+    @Test
+    fun `getEditDistance returns proper Levenshtein distance between words`(){
+        val first = "spelling"
+        val second = "splelin"
+        val checker = SpellChecker(dictionary, source)
+        val distance = checker.getEditDistance(first, second)
+        assert(distance == 3)
+    }
 }
