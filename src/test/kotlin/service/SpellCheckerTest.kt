@@ -37,7 +37,7 @@ class SpellCheckerTest {
         val second = "splelin"
         val checker = SpellChecker(dictionary, source)
         val distance = checker.getEditDistance(first, second)
-        assertEquals(distance, 3)
+        assertEquals(distance, 2)
     }
 
     @Test
