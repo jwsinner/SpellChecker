@@ -2,7 +2,6 @@ package io
 
 import java.io.File
 import java.io.IOException
-import java.util.Collections
 
 class Dictionary(private val dictionaryLocation: String): Text<HashSet<String>?> {
 

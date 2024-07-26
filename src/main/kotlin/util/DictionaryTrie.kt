@@ -6,7 +6,7 @@ class DictionaryTrie(private val dictionary: Dictionary) {
 
     private var rootNode: TrieNode = TrieNode()
 
-    fun insert(word: String){
+    private fun insert(word: String){
         var node = rootNode
         for(character in word.toCharArray())
             node = node.children.getOrPut(character){TrieNode()}

@@ -4,12 +4,9 @@ import io.Dictionary
 import io.SourceText
 import util.DictionaryTrie
 import java.util.SortedMap
-import java.util.stream.Collector
 import java.util.stream.Collectors
 
 class SpellChecker(private val dictionary: Dictionary, private val sourceText: SourceText) {
-
-    private val misspelledWords: HashMap<Pair<Int, Int>, String> = getMisspelledWords()
 
     fun getMisspelledWords(): HashMap<Pair<Int, Int>, String> {
         val terms = dictionary.getTerms() ?: return hashMapOf()
