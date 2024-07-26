@@ -1,0 +1,2 @@
+This is some source text with
+multiple lines available
